@@ -30,21 +30,21 @@ void resetGrab(){
 	}
 }
 
-void grabing(){
-		motor[grabMotor]= -100;
+void grabing(int speed){
+		motor[grabMotor]= -speed
 		waitUntil(SensorValue(potentiometerGrab) < 20);
 		stopMotor(grabMotor);
 }
 
-void droping(){
-		motor[grabMotor]= 100;
+void droping(int speed){
+		motor[grabMotor]= speed;
 		waitUntil(SensorValue(potentiometerGrab) > 3000);
 		stopMotor(grabMotor);
 }
 
-void picking(){
-		motor[armMotorL]= 100;
-		motor[armMotorR]= 100;
+void lifting(int speed){
+		motor[armMotorL]= speed;
+		motor[armMotorR]= speed;
 		waitUntil(SensorValue(potentiometerArm) >= 3000);
 		stopMotor(armMotorL);
 		stopMotor(armMotorR);
@@ -64,22 +64,25 @@ task main()
 {
 resetArm();
 resetGrab();
-move(127);
-//untile something
 
-grabing();
-move(127);
-//untile Something
+//Move Stright to the cube
+move(127); // at the maximume speed
+wait1Msec(3000) // for 2 seconds
 
-picking();
-droping();
+grabing(127); // Starts to grab
+move(127); // go stright
+wait1Msec(3000); // for 2 seconds
 
-turnLeft(100);
-move(127);
-wait1Msec(5000);
+lifting(127); // Move the arm up
+droping(127); // release it
 
-turnLeft(100);
-move(-127);
-wait1Msec(500);
+turnLeft(100); // turn left
+wait1Msec(500); // for 300 micosecond
+move(127); // Move forward at a maximume speed
+wait1Msec(5000); // for 5 second
+
+turnLeft(100); // Turn left back at a speed of 100
+move(127); // Turn left back at a miximume speed
+wait1Msec(500); // for 300 microsecond
 
 }
