@@ -56,10 +56,14 @@ void move(int speed) {
 }
 
 void turnLeft(int speed){
+	motor[leftMotor]= -speed;
+	motor[rightMotor]= speed;
+}
+
+void turnRight(int speed){
 	motor[leftMotor]= speed;
 	motor[rightMotor]= -speed;
 }
-
 task main()
 {
 resetArm();
@@ -67,7 +71,7 @@ resetGrab();
 
 //Move Stright to the cube
 move(127); // at the maximume speed
-wait1Msec(3000) // for 2 seconds
+wait1Msec(3000); // for 2 seconds
 
 grabing(127); // Starts to grab
 move(127); // go stright
@@ -83,6 +87,26 @@ wait1Msec(5000); // for 5 second
 
 turnLeft(100); // Turn left back at a speed of 100
 move(127); // Turn left back at a miximume speed
-wait1Msec(500); // for 300 microsecond
+wait1Msec(500); // for 500 microsecond
 
 }
+
+//2nd motion
+
+move (127); //move straight to stars
+wait1Msec (3000); // keep moving forward for three 3 seconds
+
+move (127);	//keeping moving
+grabing (127); //while moving grabing
+wait1Msec (2000) // keep the action for 2 seconds
+
+turnRight (100);// trun right
+wait1Msec (2000); //move for 2 seconds
+
+move (127); // move forward
+wait1Msec (3000) //going for 3 seconds
+
+lifting (100); // lift the arm up
+wait1Msec (2000) //getting the arm up for 2 seconds
+
+droping (127); // droping the object
