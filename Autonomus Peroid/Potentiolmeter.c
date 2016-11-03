@@ -42,7 +42,7 @@ void droping(){
 		stopMotor(grabMotor);
 }
 
-void Picking(){
+void picking(){
 		motor[armMotorL]= 100;
 		motor[armMotorR]= 100;
 		waitUntil(SensorValue(potentiometerArm) >= 3000);
@@ -50,20 +50,36 @@ void Picking(){
 		stopMotor(armMotorR);
 }
 
-void firstMove(int speed) {
+void move(int speed) {
 		motor[leftMotor] = speed;
 		motor[rightMotor] = speed;
 }
 
-void turn(int speed){
+void turnLeft(int speed){
 	motor[leftMotor]= speed;
 	motor[rightMotor]= -speed;
 }
 
 task main()
 {
-	resetArm();
-	resetGrab();
-	grabing();
-	firstMove(63);
+resetArm();
+resetGrab();
+move(127);
+//untile something
+
+grabing();
+move(127);
+//untile Something
+
+picking();
+droping();
+
+turnLeft(100);
+move(127);
+wait1Msec(5000);
+
+turnLeft(100);
+move(-127);
+wait1Msec(500);
+
 }
