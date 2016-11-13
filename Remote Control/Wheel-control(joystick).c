@@ -5,7 +5,7 @@
 task main()
 {
 
-	while(){
+	while(1 == 1){
 	//Wheels remote control
 		motor [rightMotor] = vexRT[Ch2]; //channel 3 controlling left motor
 		motor [leftMotor] = vexRT[Ch2]; //channel 2 controlling right motor
