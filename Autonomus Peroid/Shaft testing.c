@@ -19,60 +19,46 @@ void liftMove(){
 	nMotorEncoder[rightMotor] = 0;
 
   while(nMotorEncoder[leftMotor] < 1200){
-  	x = nMotorEncoder[leftMotor];
+
     motor[rightMotor] = 90;
     motor[leftMotor] = 90;
 
-    if(SensorValue[shaft] < 85){
-
-		  motor[Tright] = (110 - SensorValue[shaft])/2;
-			motor[Bright] = (110 - SensorValue[shaft])/2;
-			motor[Bleft] = (110 - SensorValue[shaft])/2;
-			motor[Tleft] = (110 - SensorValue[shaft])/2;
+    if(SensorValue[shaft] < 80){
+		  motor[Tright] = 60;
+			motor[Bright] = 60;
+			motor[Bleft] = 60;
+			motor[Tleft] = 60;
+		}else {
+			motor[Tright] = 15;
+			motor[Bright] = 15;
+			motor[Bleft] = 15;
+			motor[Tleft] = 15;
 		}
 	}
-
 	motor[rightMotor] = 0;
 	motor[leftMotor] = 0;
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+}
+
+
+void turnRight(){
 	nMotorEncoder[rightMotor] = 0;
 	nMotorEncoder[leftMotor] = 0;
 
 	while(abs(nMotorEncoder[rightMotor]) < 300){
-
-		motor[leftMotor]= 35;
+		x = nMotorEncoder[rightMotor];
+		motor[leftMotor] = 35;
 		motor[rightMotor]= -35;
-
-		motor[Tright] = 15;
-		motor[Bright] = 15;
-		motor[Bleft] = 15;
-		motor[Tleft] = 15;
-
-	}
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-}
-
-
-void lift(){
-	SensorValue[shaft] = 0;
-	while(SensorValue[shaft] < 105){
-		if(SensorValue[shaft] < 50){
-	    	motor[Tright] = 127;
-				motor[Bright] = 127;
-				motor[Bleft] = 127;
-				motor[Tleft] = 127;
-		}else	if(SensorValue[shaft] > 51){
-	    	motor[Tright] = 70;
-				motor[Bright] = 70;
-				motor[Bleft] = 70;
-				motor[Tleft] = 70;
+		if(SensorValue[shaft] > 75){
+			motor[Tright] = 15;
+			motor[Bright] = 15;
+			motor[Bleft] = 15;
+			motor[Tleft] = 15;
+		}else{
+			motor[Tright] = 0;
+			motor[Bright] = 0;
+			motor[Bleft] = 0;
+			motor[Tleft] = 0;
 		}
-	}
-	while(1 == 1){
-		motor[Tright] = 15;
-		motor[Bright] = 15;
-		motor[Bleft] = 15;
-		motor[Tleft] = 15;
 	}
 }
 
@@ -81,4 +67,5 @@ task main()
 {
 	SensorValue[shaft] = 0;
   liftMove();
+  turnRight();
 }
