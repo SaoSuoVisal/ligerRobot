@@ -15,13 +15,17 @@ int threshold = 15; // torelance between each joystick
 int limitRPM = 160; // For high torque motor the has a limit speed
 int sisSpeed = 90; // For scissors speed
 float mult = 100;
+
 float err = 0;
 float errPri = 0;
+
 int leftPot = SensorValue[potentiometerScissorsLeft];
 int rightPot = SensorValue[potentiometerScissorsRight];
+
 int activate = 0;
-int left = 75;
-int right = 120;
+
+int left = 80;
+int right = 100;
 
 task main()
 {
@@ -30,37 +34,20 @@ task main()
 		rightPot = SensorValue[potentiometerScissorsRight];
 		int bias = 15;
 
-		//update rightScissors
-		/*activate = 0;
-		if (abs(leftPot - rightPot) > 100){
-			int diff = (leftPot - rightPot)/10;
-			if (diff > 127)
-				diff = 120;
-			motor[scissorsLeft] = diff;
-			activate = diff;
-		}*/
 		// Scissors Lift
-		if((vexRT[Btn5U] == 1 || vexRT[Btn5UXmtr2] == 1)&&leftPot>1000&&rightPot>1000){
+		if((vexRT[Btn5U] == 1 || vexRT[Btn5UXmtr2] == 1)){
 			motor[scissorsLeft] = left;
 			motor[scissorsRight] = right;
-			} else if((vexRT[Btn5D] == 1 || vexRT[Btn5DXmtr2] == 1)&&leftPot<1380&&rightPot<1380){
-			motor[scissorsLeft] = -40;
-			motor[scissorsRight] = -40;
-			} else{
-			motor[scissorsRight] = 25+(rightPot - leftPot+70)/2;
-			motor[scissorsLeft] = 25;
 		}
 
+		else if((vexRT[Btn5D] == 1 || vexRT[Btn5DXmtr2] == 1)){
+			motor[scissorsLeft] = -40;
+			motor[scissorsRight] = -40;
+		}
 
-
-		err = leftPot - rightPot;
-		float difference = err - errPri;
-		difference = difference/mult;
-		int max = 100;
-		int out = difference*difference*difference;
-		//motor[scissorsRight] = out;
-
-		errPri = err;
-		wait1Msec(10);
+		else{
+			motor[scissorsRight] = 25 + (leftPot - rightPot)/2;
+			motor[scissorsLeft] = 25;
+		}
 	}
 }
