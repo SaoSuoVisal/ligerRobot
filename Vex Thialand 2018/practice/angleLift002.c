@@ -16,8 +16,8 @@ int setpoint =  SensorValue[potentiometerAngle]; // 1600 //480
 int speedLimit = 100;
 int vector = 1;
 
-float kP = 0.12;
-float kI = 0.11;
+float kP = 0.09;
+float kI = 0.10;
 
 int err = 0;
 int currentpot = 0;

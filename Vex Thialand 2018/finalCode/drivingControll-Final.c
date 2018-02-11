@@ -162,10 +162,10 @@ void mobileGoalRun(){
 }
 
 void clawRun(){
-	if(vexRT[Btn6D] == 1){
+	if(vexRT[Btn6D] == 1 || vexRT[Btn5DXmtr2] == 1){
 		out = 1;
 		motor[claw] = clawSpeed;
-		} else if(vexRT[Btn6U] == 1){
+		} else if(vexRT[Btn6U] == 1 || vexRT[Btn5DXmtr2] == 1){
 		out = 0;
 		} else if(out == 1){
 		motor[claw] = stalSpeed;
